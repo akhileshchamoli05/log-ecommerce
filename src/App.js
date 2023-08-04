@@ -1,25 +1,49 @@
-import { Switch, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
-import HomePage from './pages/HomePage';
+import { Shop } from './pages/shop';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import AuthContext from './store/auth-context';
+import { Cart } from './pages/cart';
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
   return (
+    
     <Layout>
       <Switch>
         <Route path='/' exact>
-          <HomePage />
+          <Shop />
         </Route>
-        <Route path='/auth'>
-          <AuthPage />
+        <Route path='/contact'>
+          <Contact />
         </Route>
+        <Route path='/cart-item'>
+          <Cart />
+        </Route>
+        <Route path='/about'>
+          <About />
+        </Route>
+        {!authCtx.isLoggedIn && (
+          <Route path='/auth'>
+            <AuthPage />
+          </Route>
+        )}
         <Route path='/profile'>
-          <UserProfile />
+          {authCtx.isLoggedIn && <UserProfile />}
+          {!authCtx.isLoggedIn && <Redirect to='/auth' />}
+        </Route>
+        <Route path='*'>
+          <Redirect to='/' />
         </Route>
       </Switch>
     </Layout>
+    
   );
 }
 
