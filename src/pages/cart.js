@@ -28,7 +28,7 @@ export const Cart = () => {
       {totalAmount > 0 ? (
         <div className="checkout">
           <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => history.push("/product")}> Continue Shopping </button>
+          <button onClick={() => history.push("/")}> Continue Shopping </button>
           <button
             onClick={() => {
               checkout();
