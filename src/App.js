@@ -9,7 +9,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import AuthContext from './store/auth-context';
 import { Cart } from './pages/cart';
-
+import Homepage from './pages/HomePage'
 function App() {
   const authCtx = useContext(AuthContext);
 
@@ -17,7 +17,10 @@ function App() {
     
     <Layout>
       <Switch>
-        <Route path='/' exact>
+      <Route path='/' exact>
+          <Homepage />
+        </Route>
+        <Route path='/product'>
           <Shop />
         </Route>
         <Route path='/contact'>

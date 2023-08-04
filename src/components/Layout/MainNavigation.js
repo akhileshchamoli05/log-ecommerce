@@ -1,16 +1,18 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 import AuthContext from '../../store/auth-context';
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = () => {
   const authCtx = useContext(AuthContext);
-
+const history=useHistory();
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler = () => {
     authCtx.logout();
+    history.push("/")
     // optional: redirect the user
   };
 
@@ -24,6 +26,11 @@ const MainNavigation = () => {
           {!isLoggedIn && (
             <li>
               <Link to='/auth'>Login</Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li>
+              <Link to='/product'>Product</Link>
             </li>
           )}
           {isLoggedIn && (
